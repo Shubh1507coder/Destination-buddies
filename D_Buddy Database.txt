@@ -1,0 +1,1655 @@
+USE [D_Buddy]
+GO
+ALTER TABLE [dbo].[tbl_train] DROP CONSTRAINT [FK_tbl_train_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_flight] DROP CONSTRAINT [FK_tbl_flight_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_bus] DROP CONSTRAINT [FK_tbl_bus_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_booktrips] DROP CONSTRAINT [FK_tbl_booktrips_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_contact] DROP CONSTRAINT [DF__tbl_conta__Respo__6E01572D]
+GO
+/****** Object:  Table [dbo].[tblState]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tblState]') AND type in (N'U'))
+DROP TABLE [dbo].[tblState]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tblCity]') AND type in (N'U'))
+DROP TABLE [dbo].[tblCity]
+GO
+/****** Object:  Table [dbo].[tbl_user]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_user]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_user]
+GO
+/****** Object:  Table [dbo].[tbl_train]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_train]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_train]
+GO
+/****** Object:  Table [dbo].[tbl_flight]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_flight]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_flight]
+GO
+/****** Object:  Table [dbo].[tbl_contact]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_contact]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_contact]
+GO
+/****** Object:  Table [dbo].[tbl_bus]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_bus]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_bus]
+GO
+/****** Object:  Table [dbo].[tbl_booktrips]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_booktrips]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_booktrips]
+GO
+/****** Object:  Table [dbo].[tbl_admin]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbl_admin]') AND type in (N'U'))
+DROP TABLE [dbo].[tbl_admin]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 19-03-2025 16:37:34 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[__EFMigrationsHistory]') AND type in (N'U'))
+DROP TABLE [dbo].[__EFMigrationsHistory]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_admin]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_admin](
+	[admin_id] [int] IDENTITY(1,1) NOT NULL,
+	[admin_email] [nvarchar](max) NOT NULL,
+	[admin_password] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_tbl_admin] PRIMARY KEY CLUSTERED 
+(
+	[admin_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_booktrips]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_booktrips](
+	[b_id] [int] IDENTITY(1,1) NOT NULL,
+	[trip_from] [nvarchar](max) NULL,
+	[trip_to] [nvarchar](max) NULL,
+	[passengers] [int] NULL,
+	[trip_date] [datetime2](7) NULL,
+	[price] [int] NOT NULL,
+	[user_id] [int] NOT NULL,
+ CONSTRAINT [PK_tbl_booktrips] PRIMARY KEY CLUSTERED 
+(
+	[b_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_bus]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_bus](
+	[b_id] [int] IDENTITY(1,1) NOT NULL,
+	[b_from] [nvarchar](max) NULL,
+	[b_to] [nvarchar](max) NULL,
+	[passengers] [int] NULL,
+	[b_date] [datetime2](7) NULL,
+	[price] [nvarchar](max) NULL,
+	[user_id] [int] NOT NULL,
+	[paymentId] [nvarchar](max) NULL,
+ CONSTRAINT [PK_tbl_bus] PRIMARY KEY CLUSTERED 
+(
+	[b_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_contact]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_contact](
+	[c_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](max) NULL,
+	[email] [nvarchar](max) NULL,
+	[subject] [nvarchar](max) NULL,
+	[message] [nvarchar](max) NULL,
+	[ResponseStatus] [bit] NOT NULL,
+ CONSTRAINT [PK_tbl_contact] PRIMARY KEY CLUSTERED 
+(
+	[c_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_flight]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_flight](
+	[f_id] [int] IDENTITY(1,1) NOT NULL,
+	[f_from] [nvarchar](max) NULL,
+	[f_to] [nvarchar](max) NULL,
+	[f_email] [nvarchar](max) NULL,
+	[passengers] [int] NULL,
+	[f_date] [datetime2](7) NULL,
+	[price] [nvarchar](max) NULL,
+	[user_id] [int] NOT NULL,
+ CONSTRAINT [PK_tbl_flight] PRIMARY KEY CLUSTERED 
+(
+	[f_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_train]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_train](
+	[t_id] [int] IDENTITY(1,1) NOT NULL,
+	[t_from] [nvarchar](max) NULL,
+	[t_to] [nvarchar](max) NULL,
+	[t_email] [nvarchar](max) NULL,
+	[passengers] [int] NULL,
+	[t_date] [datetime2](7) NULL,
+	[price] [int] NOT NULL,
+	[user_id] [int] NOT NULL,
+ CONSTRAINT [PK_tbl_train] PRIMARY KEY CLUSTERED 
+(
+	[t_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_user]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_user](
+	[user_id] [int] IDENTITY(1,1) NOT NULL,
+	[user_name] [nvarchar](max) NULL,
+	[user_email] [nvarchar](max) NULL,
+	[user_phone] [nvarchar](max) NULL,
+	[user_password] [nvarchar](max) NULL,
+ CONSTRAINT [PK_tbl_user] PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCity]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCity](
+	[CityID] [int] IDENTITY(1,1) NOT NULL,
+	[CityName] [varchar](50) NULL,
+	[StateID] [int] NULL,
+	[AddDate] [datetime] NULL,
+	[IsActive] [bit] NULL,
+	[IsDelete] [bit] NULL,
+	[LastUpdate] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblState]    Script Date: 19-03-2025 16:37:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblState](
+	[StateID] [int] IDENTITY(1,1) NOT NULL,
+	[StateName] [varchar](50) NULL,
+	[CountryID] [int] NULL,
+	[AddDate] [datetime] NULL,
+	[IsActive] [bit] NULL,
+	[LastUpdate] [datetime] NULL,
+	[IsDelete] [bit] NULL
+) ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20250312062006_admin', N'9.0.3')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20250312113650_response', N'9.0.3')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20250312122013_as', N'9.0.3')
+GO
+SET IDENTITY_INSERT [dbo].[tbl_admin] ON 
+GO
+INSERT [dbo].[tbl_admin] ([admin_id], [admin_email], [admin_password]) VALUES (1, N'admin@gmail.com', N'ramayana')
+GO
+SET IDENTITY_INSERT [dbo].[tbl_admin] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_booktrips] ON 
+GO
+INSERT [dbo].[tbl_booktrips] ([b_id], [trip_from], [trip_to], [passengers], [trip_date], [price], [user_id]) VALUES (2, N'Unnao', N'Lucknow', 4, CAST(N'2025-03-15T00:00:00.0000000' AS DateTime2), 14000, 1)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_booktrips] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_bus] ON 
+GO
+INSERT [dbo].[tbl_bus] ([b_id], [b_from], [b_to], [passengers], [b_date], [price], [user_id], [paymentId]) VALUES (15, N'unnao', N'Lucknow', 1, CAST(N'2025-03-12T00:00:00.0000000' AS DateTime2), N'500', 1, NULL)
+GO
+INSERT [dbo].[tbl_bus] ([b_id], [b_from], [b_to], [passengers], [b_date], [price], [user_id], [paymentId]) VALUES (16, N'unnao', N'Lucknow', 1, CAST(N'2025-03-27T00:00:00.0000000' AS DateTime2), N'500', 1, NULL)
+GO
+INSERT [dbo].[tbl_bus] ([b_id], [b_from], [b_to], [passengers], [b_date], [price], [user_id], [paymentId]) VALUES (17, N'unnao', N'Lucknow', 1, CAST(N'2025-03-08T00:00:00.0000000' AS DateTime2), N'500', 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_bus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_contact] ON 
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (1, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'Ok', 1)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (2, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'ewsdwesd', 1)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (3, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'ewsdwesd', 1)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (4, N'AVI', N'avinashapr9616@gmail.com', N'v x ', N'qasqas', 1)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (5, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'asxsx', 1)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (6, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'asqas', 0)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (7, N'Avinash Prajapati', N'admin@gmail.com', N'v x ', N'sdcsadcsdazc', 0)
+GO
+INSERT [dbo].[tbl_contact] ([c_id], [name], [email], [subject], [message], [ResponseStatus]) VALUES (8, N'Avinash Prajapati', N'avinashapr9616@gmail.com', N'v x ', N'qsdadxqadx', 0)
+GO
+SET IDENTITY_INSERT [dbo].[tbl_contact] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tbl_user] ON 
+GO
+INSERT [dbo].[tbl_user] ([user_id], [user_name], [user_email], [user_phone], [user_password]) VALUES (1, N'Avinash', N'avinashapr9616@gmail.com', N'8858585212', N'12345')
+GO
+INSERT [dbo].[tbl_user] ([user_id], [user_name], [user_email], [user_phone], [user_password]) VALUES (3, N'sejal', N'hema1@gmail.com', N'8858585212', N'12345')
+GO
+INSERT [dbo].[tbl_user] ([user_id], [user_name], [user_email], [user_phone], [user_password]) VALUES (4, N'Avinash', N'avinashapr9616@gmail.com', N'8858585212', N'5252552')
+GO
+INSERT [dbo].[tbl_user] ([user_id], [user_name], [user_email], [user_phone], [user_password]) VALUES (5, N'Avinash', N'hema1@gmail.com', N'9956359856', N'8522')
+GO
+INSERT [dbo].[tbl_user] ([user_id], [user_name], [user_email], [user_phone], [user_password]) VALUES (6, N'sejal', N'avinashapr9616@gmail.com', N'8858585212', N'dewsd')
+GO
+SET IDENTITY_INSERT [dbo].[tbl_user] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tblCity] ON 
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (1, N'Adilabad', 32, CAST(N'2017-02-06T14:55:15.360' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.360' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (2, N'Warangal', 32, CAST(N'2017-02-06T14:55:15.367' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.367' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (3, N'Karim Nagar', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (4, N'Mahabub Nagar', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (5, N'K.V.Rangareddy', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (6, N'Medak', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (7, N'Nalgonda', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (8, N'Nizamabad', 32, CAST(N'2017-02-06T14:55:15.370' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.370' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (9, N'Hyderabad', 32, CAST(N'2017-02-06T14:55:15.373' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.373' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (10, N'Ananthapur', 2, CAST(N'2017-02-06T14:55:15.373' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.373' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (11, N'Cuddapah', 2, CAST(N'2017-02-06T14:55:15.373' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.373' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (12, N'Chittoor', 2, CAST(N'2017-02-06T14:55:15.373' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.373' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (13, N'Kurnool', 2, CAST(N'2017-02-06T14:55:15.377' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.377' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (14, N'Prakasam', 2, CAST(N'2017-02-06T14:55:15.377' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.377' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (15, N'West Godavari', 2, CAST(N'2017-02-06T14:55:15.377' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.377' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (16, N'Krishna', 2, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (17, N'Nellore', 2, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (18, N'Guntur', 2, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (19, N'Khammam', 32, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (20, N'East Godavari', 2, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (21, N'Visakhapatnam', 2, CAST(N'2017-02-06T14:55:15.380' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.380' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (22, N'Pondicherry', 27, CAST(N'2017-02-06T14:55:15.383' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.383' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (23, N'Vizianagaram', 2, CAST(N'2017-02-06T14:55:15.383' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.383' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (24, N'Srikakulam', 2, CAST(N'2017-02-06T14:55:15.383' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.383' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (25, N'Lakhimpur', 4, CAST(N'2017-02-06T14:55:15.387' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.387' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (26, N'Dibrugarh', 4, CAST(N'2017-02-06T14:55:15.387' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.387' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (27, N'Dhemaji', 4, CAST(N'2017-02-06T14:55:15.387' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.387' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (28, N'Marigaon', 4, CAST(N'2017-02-06T14:55:15.387' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.387' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (29, N'Nagaon', 4, CAST(N'2017-02-06T14:55:15.390' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.390' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (30, N'Karbi Anglong', 4, CAST(N'2017-02-06T14:55:15.390' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.390' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (31, N'Golaghat', 4, CAST(N'2017-02-06T14:55:15.390' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.390' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (32, N'Sibsagar', 4, CAST(N'2017-02-06T14:55:15.390' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.390' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (33, N'Jorhat', 4, CAST(N'2017-02-06T14:55:15.390' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.390' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (34, N'Tinsukia', 4, CAST(N'2017-02-06T14:55:15.393' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.393' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (35, N'Karimganj', 4, CAST(N'2017-02-06T14:55:15.393' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.393' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (36, N'Hailakandi', 4, CAST(N'2017-02-06T14:55:15.393' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.393' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (37, N'Cachar', 4, CAST(N'2017-02-06T14:55:15.393' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.393' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (38, N'North Cachar Hills', 4, CAST(N'2017-02-06T14:55:15.397' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.397' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (39, N'Darrang', 4, CAST(N'2017-02-06T14:55:15.397' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.397' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (40, N'Sonitpur', 4, CAST(N'2017-02-06T14:55:15.397' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.397' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (41, N'Bongaigaon', 4, CAST(N'2017-02-06T14:55:15.400' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.400' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (42, N'Kokrajhar', 4, CAST(N'2017-02-06T14:55:15.403' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.403' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (43, N'Goalpara', 4, CAST(N'2017-02-06T14:55:15.407' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.407' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (44, N'Dhubri', 4, CAST(N'2017-02-06T14:55:15.407' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.407' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (45, N'Kamrup', 4, CAST(N'2017-02-06T14:55:15.407' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.407' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (46, N'Nalbari', 4, CAST(N'2017-02-06T14:55:15.410' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.410' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (47, N'Barpeta', 4, CAST(N'2017-02-06T14:55:15.410' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.410' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (48, N'Begusarai', 5, CAST(N'2017-02-06T14:55:15.410' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.410' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (49, N'Khagaria', 5, CAST(N'2017-02-06T14:55:15.410' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.410' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (50, N'Darbhanga', 5, CAST(N'2017-02-06T14:55:15.413' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.413' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (51, N'Madhubani', 5, CAST(N'2017-02-06T14:55:15.413' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.413' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (52, N'Muzaffarpur', 5, CAST(N'2017-02-06T14:55:15.413' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.413' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (53, N'Samastipur', 5, CAST(N'2017-02-06T14:55:15.417' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.417' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (54, N'Sitamarhi', 5, CAST(N'2017-02-06T14:55:15.417' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.417' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (55, N'East Champaran', 5, CAST(N'2017-02-06T14:55:15.417' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.417' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (56, N'Supaul', 5, CAST(N'2017-02-06T14:55:15.420' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.420' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (57, N'Vaishali', 5, CAST(N'2017-02-06T14:55:15.420' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.420' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (58, N'Purnia', 5, CAST(N'2017-02-06T14:55:15.420' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.420' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (59, N'Araria', 5, CAST(N'2017-02-06T14:55:15.420' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.420' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (60, N'Katihar', 5, CAST(N'2017-02-06T14:55:15.420' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.420' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (61, N'Kishanganj', 5, CAST(N'2017-02-06T14:55:15.423' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.423' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (62, N'Madhepura', 5, CAST(N'2017-02-06T14:55:15.423' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.423' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (63, N'Saharsa', 5, CAST(N'2017-02-06T14:55:15.423' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.423' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (64, N'Saran', 5, CAST(N'2017-02-06T14:55:15.427' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.427' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (65, N'Siwan', 5, CAST(N'2017-02-06T14:55:15.427' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.427' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (66, N'Bhojpur', 5, CAST(N'2017-02-06T14:55:15.427' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.427' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (67, N'Sheohar', 5, CAST(N'2017-02-06T14:55:15.427' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.427' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (68, N'Gopalganj', 5, CAST(N'2017-02-06T14:55:15.430' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.430' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (69, N'West Champaran', 5, CAST(N'2017-02-06T14:55:15.430' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.430' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (70, N'Gaya', 5, CAST(N'2017-02-06T14:55:15.430' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.430' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (71, N'Aurangabad(BH)', 5, CAST(N'2017-02-06T14:55:15.430' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.430' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (72, N'Arwal', 5, CAST(N'2017-02-06T14:55:15.430' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.430' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (73, N'Bhagalpur', 5, CAST(N'2017-02-06T14:55:15.433' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.433' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (74, N'Banka', 5, CAST(N'2017-02-06T14:55:15.433' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.433' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (75, N'Munger', 5, CAST(N'2017-02-06T14:55:15.433' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.433' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (76, N'Buxar', 5, CAST(N'2017-02-06T14:55:15.437' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.437' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (77, N'Jehanabad', 5, CAST(N'2017-02-06T14:55:15.437' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.437' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (78, N'Patna', 5, CAST(N'2017-02-06T14:55:15.437' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.437' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (79, N'Sheikhpura', 5, CAST(N'2017-02-06T14:55:15.437' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.437' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (80, N'Jamui', 5, CAST(N'2017-02-06T14:55:15.440' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.440' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (81, N'Lakhisarai', 5, CAST(N'2017-02-06T14:55:15.440' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.440' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (82, N'Nalanda', 5, CAST(N'2017-02-06T14:55:15.440' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.440' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (83, N'Nawada', 5, CAST(N'2017-02-06T14:55:15.440' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.440' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (84, N'Rohtas', 5, CAST(N'2017-02-06T14:55:15.443' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.443' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (85, N'Kaimur (Bhabua)', 5, CAST(N'2017-02-06T14:55:15.443' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.443' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (86, N'Kanker', 7, CAST(N'2017-02-06T14:55:15.443' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.443' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (87, N'Bastar', 7, CAST(N'2017-02-06T14:55:15.447' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.447' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (88, N'Dantewada', 7, CAST(N'2017-02-06T14:55:15.447' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.447' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (89, N'Bijapur(CGH)', 7, CAST(N'2017-02-06T14:55:15.447' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.447' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (90, N'Narayanpur', 7, CAST(N'2017-02-06T14:55:15.450' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.450' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (91, N'Bilaspur(CGH)', 7, CAST(N'2017-02-06T14:55:15.450' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.450' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (92, N'Janjgir-champa', 7, CAST(N'2017-02-06T14:55:15.450' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.450' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (93, N'Korba', 7, CAST(N'2017-02-06T14:55:15.450' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.450' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (94, N'Durg', 7, CAST(N'2017-02-06T14:55:15.450' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.450' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (95, N'Rajnandgaon', 7, CAST(N'2017-02-06T14:55:15.453' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.453' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (96, N'Kawardha', 7, CAST(N'2017-02-06T14:55:15.453' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.453' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (97, N'Surguja', 7, CAST(N'2017-02-06T14:55:15.453' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.453' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (98, N'Raigarh', 7, CAST(N'2017-02-06T14:55:15.453' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.453' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (99, N'Jashpur', 7, CAST(N'2017-02-06T14:55:15.457' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.457' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (100, N'Koriya', 7, CAST(N'2017-02-06T14:55:15.457' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.457' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (101, N'Raipur', 7, CAST(N'2017-02-06T14:55:15.457' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.457' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (102, N'Mahasamund', 7, CAST(N'2017-02-06T14:55:15.460' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.460' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (103, N'Dhamtari', 7, CAST(N'2017-02-06T14:55:15.460' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.460' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (104, N'Gariaband', 7, CAST(N'2017-02-06T14:55:15.460' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.460' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (105, N'East Delhi', 10, CAST(N'2017-02-06T14:55:15.460' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.460' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (106, N'North East Delhi', 10, CAST(N'2017-02-06T14:55:15.463' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.463' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (107, N'North West Delhi', 10, CAST(N'2017-02-06T14:55:15.463' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.463' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (108, N'North Delhi', 10, CAST(N'2017-02-06T14:55:15.463' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.463' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (109, N'Central Delhi', 10, CAST(N'2017-02-06T14:55:15.467' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.467' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (110, N'New Delhi', 10, CAST(N'2017-02-06T14:55:15.467' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.467' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (111, N'South Delhi', 10, CAST(N'2017-02-06T14:55:15.467' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.467' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (112, N'South West Delhi', 10, CAST(N'2017-02-06T14:55:15.470' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.470' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (113, N'West Delhi', 10, CAST(N'2017-02-06T14:55:15.470' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.470' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (114, N'Ahmedabad', 12, CAST(N'2017-02-06T14:55:15.470' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.470' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (115, N'Gandhi Nagar', 12, CAST(N'2017-02-06T14:55:15.470' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.470' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (116, N'Banaskantha', 12, CAST(N'2017-02-06T14:55:15.473' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.473' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (117, N'Mahesana', 12, CAST(N'2017-02-06T14:55:15.473' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.473' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (118, N'Surendra Nagar', 12, CAST(N'2017-02-06T14:55:15.473' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.473' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (119, N'Patan', 12, CAST(N'2017-02-06T14:55:15.473' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.473' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (120, N'Sabarkantha', 12, CAST(N'2017-02-06T14:55:15.477' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.477' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (121, N'Amreli', 12, CAST(N'2017-02-06T14:55:15.477' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.477' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (122, N'Rajkot', 12, CAST(N'2017-02-06T14:55:15.477' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.477' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (123, N'Junagadh', 12, CAST(N'2017-02-06T14:55:15.480' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.480' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (124, N'Bhavnagar', 12, CAST(N'2017-02-06T14:55:15.480' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.480' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (125, N'Jamnagar', 12, CAST(N'2017-02-06T14:55:15.480' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.480' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (126, N'Porbandar', 12, CAST(N'2017-02-06T14:55:15.480' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.480' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (127, N'Diu', 9, CAST(N'2017-02-06T14:55:15.483' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.483' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (128, N'Kachchh', 12, CAST(N'2017-02-06T14:55:15.483' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.483' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (129, N'Anand', 12, CAST(N'2017-02-06T14:55:15.483' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.483' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (130, N'Kheda', 12, CAST(N'2017-02-06T14:55:15.483' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.483' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (131, N'Surat', 12, CAST(N'2017-02-06T14:55:15.487' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.487' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (132, N'The Dangs', 12, CAST(N'2017-02-06T14:55:15.487' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.487' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (133, N'Tapi', 12, CAST(N'2017-02-06T14:55:15.487' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.487' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (134, N'Navsari', 12, CAST(N'2017-02-06T14:55:15.490' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.490' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (135, N'Vadodara', 12, CAST(N'2017-02-06T14:55:15.490' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.490' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (136, N'Bharuch', 12, CAST(N'2017-02-06T14:55:15.490' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.490' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (137, N'Narmada', 12, CAST(N'2017-02-06T14:55:15.493' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.493' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (138, N'Dahod', 12, CAST(N'2017-02-06T14:55:15.493' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.493' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (139, N'Panch Mahals', 12, CAST(N'2017-02-06T14:55:15.493' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.493' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (140, N'Valsad', 12, CAST(N'2017-02-06T14:55:15.497' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.497' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (141, N'Dadra & Nagar Haveli', 8, CAST(N'2017-02-06T14:55:15.497' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.497' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (142, N'Daman', 9, CAST(N'2017-02-06T14:55:15.497' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.497' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (143, N'Ambala', 13, CAST(N'2017-02-06T14:55:15.500' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.500' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (144, N'Yamuna Nagar', 13, CAST(N'2017-02-06T14:55:15.500' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.500' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (145, N'Panchkula', 13, CAST(N'2017-02-06T14:55:15.500' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.500' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (146, N'Bhiwani', 13, CAST(N'2017-02-06T14:55:15.500' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.500' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (147, N'Faridabad', 13, CAST(N'2017-02-06T14:55:15.500' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.500' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (148, N'Gurgaon', 13, CAST(N'2017-02-06T14:55:15.503' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.503' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (149, N'Rewari', 13, CAST(N'2017-02-06T14:55:15.503' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.503' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (150, N'Mahendragarh', 13, CAST(N'2017-02-06T14:55:15.503' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.503' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (151, N'Hisar', 13, CAST(N'2017-02-06T14:55:15.507' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.507' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (152, N'Sirsa', 13, CAST(N'2017-02-06T14:55:15.507' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.507' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (153, N'Fatehabad', 13, CAST(N'2017-02-06T14:55:15.507' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.507' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (154, N'Karnal', 13, CAST(N'2017-02-06T14:55:15.510' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.510' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (155, N'Panipat', 13, CAST(N'2017-02-06T14:55:15.510' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.510' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (156, N'Jind', 13, CAST(N'2017-02-06T14:55:15.510' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.510' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (157, N'Kaithal', 13, CAST(N'2017-02-06T14:55:15.510' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.510' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (158, N'Kurukshetra', 13, CAST(N'2017-02-06T14:55:15.513' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.513' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (159, N'Jhajjar', 13, CAST(N'2017-02-06T14:55:15.513' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.513' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (160, N'Rohtak', 13, CAST(N'2017-02-06T14:55:15.513' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.513' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (161, N'Sonipat', 13, CAST(N'2017-02-06T14:55:15.517' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.517' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (162, N'Chamba', 14, CAST(N'2017-02-06T14:55:15.517' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.517' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (163, N'Kangra', 14, CAST(N'2017-02-06T14:55:15.517' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.517' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (164, N'Bilaspur (HP)', 14, CAST(N'2017-02-06T14:55:15.520' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.520' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (165, N'Hamirpur(HP)', 14, CAST(N'2017-02-06T14:55:15.520' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.520' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (166, N'Una', 14, CAST(N'2017-02-06T14:55:15.520' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.520' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (167, N'Mandi', 14, CAST(N'2017-02-06T14:55:15.523' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.523' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (168, N'Kullu', 14, CAST(N'2017-02-06T14:55:15.523' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.523' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (169, N'Lahul & Spiti', 14, CAST(N'2017-02-06T14:55:15.523' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.523' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (170, N'Kinnaur', 14, CAST(N'2017-02-06T14:55:15.523' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.523' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (171, N'Shimla', 14, CAST(N'2017-02-06T14:55:15.527' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.527' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (172, N'Sirmaur', 14, CAST(N'2017-02-06T14:55:15.527' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.527' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (173, N'Solan', 14, CAST(N'2017-02-06T14:55:15.527' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.527' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (174, N'Bandipur', 15, CAST(N'2017-02-06T14:55:15.530' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.530' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (175, N'Baramulla', 15, CAST(N'2017-02-06T14:55:15.530' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.530' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (176, N'Kupwara', 15, CAST(N'2017-02-06T14:55:15.530' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.530' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (177, N'Jammu', 15, CAST(N'2017-02-06T14:55:15.530' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.530' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (178, N'Kathua', 15, CAST(N'2017-02-06T14:55:15.533' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.533' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (179, N'Udhampur', 15, CAST(N'2017-02-06T14:55:15.533' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.533' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (180, N'Poonch', 15, CAST(N'2017-02-06T14:55:15.533' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.533' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (181, N'Kargil', 15, CAST(N'2017-02-06T14:55:15.537' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.537' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (182, N'Leh', 15, CAST(N'2017-02-06T14:55:15.537' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.537' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (183, N'Rajauri', 15, CAST(N'2017-02-06T14:55:15.537' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.537' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (184, N'Reasi', 15, CAST(N'2017-02-06T14:55:15.540' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.540' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (185, N'Srinagar', 15, CAST(N'2017-02-06T14:55:15.540' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.540' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (186, N'Budgam', 15, CAST(N'2017-02-06T14:55:15.540' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.540' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (187, N'Ananthnag', 15, CAST(N'2017-02-06T14:55:15.540' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.540' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (188, N'Shopian', 15, CAST(N'2017-02-06T14:55:15.543' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.543' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (189, N'Pulwama', 15, CAST(N'2017-02-06T14:55:15.543' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.543' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (190, N'Kulgam', 15, CAST(N'2017-02-06T14:55:15.543' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.543' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (191, N'Doda', 15, CAST(N'2017-02-06T14:55:15.547' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.547' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (192, N'Dhanbad', 16, CAST(N'2017-02-06T14:55:15.547' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.547' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (193, N'Bokaro', 16, CAST(N'2017-02-06T14:55:15.547' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.547' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (194, N'Giridh', 16, CAST(N'2017-02-06T14:55:15.550' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.550' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (195, N'Hazaribag', 16, CAST(N'2017-02-06T14:55:15.550' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.550' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (196, N'Chatra', 16, CAST(N'2017-02-06T14:55:15.550' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.550' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (197, N'Ramgarh', 16, CAST(N'2017-02-06T14:55:15.550' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.550' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (198, N'Koderma', 16, CAST(N'2017-02-06T14:55:15.553' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.553' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (199, N'Latehar', 16, CAST(N'2017-02-06T14:55:15.553' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.553' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (200, N'Garhwa', 16, CAST(N'2017-02-06T14:55:15.553' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.553' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (201, N'Palamau', 16, CAST(N'2017-02-06T14:55:15.557' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.557' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (202, N'Ranchi', 16, CAST(N'2017-02-06T14:55:15.557' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.557' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (203, N'Gumla', 16, CAST(N'2017-02-06T14:55:15.557' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.557' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (204, N'Simdega', 16, CAST(N'2017-02-06T14:55:15.560' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.560' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (205, N'Lohardaga', 16, CAST(N'2017-02-06T14:55:15.560' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.560' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (206, N'West Singhbhum', 16, CAST(N'2017-02-06T14:55:15.560' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.560' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (207, N'Khunti', 16, CAST(N'2017-02-06T14:55:15.560' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.560' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (208, N'Deoghar', 16, CAST(N'2017-02-06T14:55:15.563' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.563' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (209, N'Godda', 16, CAST(N'2017-02-06T14:55:15.563' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.563' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (210, N'Jamtara', 16, CAST(N'2017-02-06T14:55:15.563' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.563' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (211, N'Sahibganj', 16, CAST(N'2017-02-06T14:55:15.567' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.567' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (212, N'Dumka', 16, CAST(N'2017-02-06T14:55:15.567' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.567' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (213, N'Pakur', 16, CAST(N'2017-02-06T14:55:15.567' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.567' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (214, N'Seraikela-kharsawan', 16, CAST(N'2017-02-06T14:55:15.570' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.570' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (215, N'East Singhbhum', 16, CAST(N'2017-02-06T14:55:15.570' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.570' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (216, N'Bangalore', 17, CAST(N'2017-02-06T14:55:15.570' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.570' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (217, N'Bangalore Rural', 17, CAST(N'2017-02-06T14:55:15.570' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.570' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (218, N'Ramanagar', 17, CAST(N'2017-02-06T14:55:15.573' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.573' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (219, N'Bagalkot', 17, CAST(N'2017-02-06T14:55:15.573' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.573' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (220, N'Bijapur(KAR)', 17, CAST(N'2017-02-06T14:55:15.573' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.573' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (221, N'Belgaum', 17, CAST(N'2017-02-06T14:55:15.577' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.577' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (222, N'Davangere', 17, CAST(N'2017-02-06T14:55:15.577' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.577' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (223, N'Bellary', 17, CAST(N'2017-02-06T14:55:15.577' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.577' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (224, N'Bidar', 17, CAST(N'2017-02-06T14:55:15.580' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.580' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (225, N'Dharwad', 17, CAST(N'2017-02-06T14:55:15.580' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.580' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (226, N'Gadag', 17, CAST(N'2017-02-06T14:55:15.580' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.580' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (227, N'Koppal', 17, CAST(N'2017-02-06T14:55:15.580' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.580' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (228, N'Yadgir', 17, CAST(N'2017-02-06T14:55:15.583' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.583' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (229, N'Gulbarga', 17, CAST(N'2017-02-06T14:55:15.583' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.583' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (230, N'Haveri', 17, CAST(N'2017-02-06T14:55:15.583' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.583' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (231, N'Uttara Kannada', 17, CAST(N'2017-02-06T14:55:15.587' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.587' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (232, N'Raichur', 17, CAST(N'2017-02-06T14:55:15.587' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.587' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (233, N'Chickmagalur', 17, CAST(N'2017-02-06T14:55:15.587' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.587' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (234, N'Chitradurga', 17, CAST(N'2017-02-06T14:55:15.590' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.590' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (235, N'Hassan', 17, CAST(N'2017-02-06T14:55:15.590' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.590' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (236, N'Kodagu', 17, CAST(N'2017-02-06T14:55:15.590' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.590' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (237, N'Chikkaballapur', 17, CAST(N'2017-02-06T14:55:15.593' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.593' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (238, N'Kolar', 17, CAST(N'2017-02-06T14:55:15.593' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.593' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (239, N'Mandya', 17, CAST(N'2017-02-06T14:55:15.593' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.593' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (240, N'Dakshina Kannada', 17, CAST(N'2017-02-06T14:55:15.597' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.597' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (241, N'Udupi', 17, CAST(N'2017-02-06T14:55:15.597' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.597' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (242, N'Mysore', 17, CAST(N'2017-02-06T14:55:15.597' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.597' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (243, N'Chamrajnagar', 17, CAST(N'2017-02-06T14:55:15.600' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.600' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (244, N'Shimoga', 17, CAST(N'2017-02-06T14:55:15.600' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.600' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (245, N'Tumkur', 17, CAST(N'2017-02-06T14:55:15.600' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.600' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (246, N'Wayanad', 18, CAST(N'2017-02-06T14:55:15.600' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.600' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (247, N'Kozhikode', 18, CAST(N'2017-02-06T14:55:15.603' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.603' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (248, N'Malappuram', 18, CAST(N'2017-02-06T14:55:15.603' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.603' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (249, N'Kannur', 18, CAST(N'2017-02-06T14:55:15.607' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.607' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (250, N'Kasargod', 18, CAST(N'2017-02-06T14:55:15.607' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.607' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (251, N'Palakkad', 18, CAST(N'2017-02-06T14:55:15.607' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.607' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (252, N'Mahe', 27, CAST(N'2017-02-06T14:55:15.610' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.610' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (253, N'Alappuzha', 18, CAST(N'2017-02-06T14:55:15.610' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.610' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (254, N'Ernakulam', 18, CAST(N'2017-02-06T14:55:15.610' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.610' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (255, N'Kottayam', 18, CAST(N'2017-02-06T14:55:15.610' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.610' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (256, N'Pathanamthitta', 18, CAST(N'2017-02-06T14:55:15.613' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.613' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (257, N'Idukki', 18, CAST(N'2017-02-06T14:55:15.613' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.613' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (258, N'Thrissur', 18, CAST(N'2017-02-06T14:55:15.613' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.613' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (259, N'Lakshadweep', 19, CAST(N'2017-02-06T14:55:15.617' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.617' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (260, N'Kollam', 18, CAST(N'2017-02-06T14:55:15.617' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.617' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (261, N'Thiruvananthapuram', 18, CAST(N'2017-02-06T14:55:15.617' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.617' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (262, N'Seoni', 20, CAST(N'2017-02-06T14:55:15.620' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.620' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (263, N'Balaghat', 20, CAST(N'2017-02-06T14:55:15.620' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.620' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (264, N'Mandla', 20, CAST(N'2017-02-06T14:55:15.620' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.620' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (265, N'Dindori', 20, CAST(N'2017-02-06T14:55:15.620' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.620' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (266, N'Bhopal', 20, CAST(N'2017-02-06T14:55:15.620' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.620' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (267, N'Raisen', 20, CAST(N'2017-02-06T14:55:15.623' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.623' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (268, N'Chhatarpur', 20, CAST(N'2017-02-06T14:55:15.623' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.623' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (269, N'Tikamgarh', 20, CAST(N'2017-02-06T14:55:15.623' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.623' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (270, N'Panna', 20, CAST(N'2017-02-06T14:55:15.627' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.627' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (271, N'Betul', 20, CAST(N'2017-02-06T14:55:15.627' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.627' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (272, N'Chhindwara', 20, CAST(N'2017-02-06T14:55:15.627' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.627' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (273, N'Hoshangabad', 20, CAST(N'2017-02-06T14:55:15.627' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.627' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (274, N'Narsinghpur', 20, CAST(N'2017-02-06T14:55:15.630' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.630' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (275, N'Harda', 20, CAST(N'2017-02-06T14:55:15.630' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.630' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (276, N'Satna', 20, CAST(N'2017-02-06T14:55:15.630' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.630' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (277, N'Rewa', 20, CAST(N'2017-02-06T14:55:15.630' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.630' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (278, N'Damoh', 20, CAST(N'2017-02-06T14:55:15.633' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.633' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (279, N'Sagar', 20, CAST(N'2017-02-06T14:55:15.633' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.633' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (280, N'Anuppur', 20, CAST(N'2017-02-06T14:55:15.633' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.633' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (281, N'Umaria', 20, CAST(N'2017-02-06T14:55:15.637' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.637' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (282, N'Shahdol', 20, CAST(N'2017-02-06T14:55:15.637' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.637' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (283, N'Sidhi', 20, CAST(N'2017-02-06T14:55:15.637' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.637' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (284, N'Singrauli', 20, CAST(N'2017-02-06T14:55:15.640' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.640' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (285, N'Vidisha', 20, CAST(N'2017-02-06T14:55:15.640' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.640' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (286, N'Ashok Nagar', 20, CAST(N'2017-02-06T14:55:15.640' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.640' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (287, N'Shivpuri', 20, CAST(N'2017-02-06T14:55:15.640' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.640' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (288, N'Guna', 20, CAST(N'2017-02-06T14:55:15.643' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.643' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (289, N'Gwalior', 20, CAST(N'2017-02-06T14:55:15.643' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.643' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (290, N'Datia', 20, CAST(N'2017-02-06T14:55:15.647' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.647' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (291, N'Bhind', 20, CAST(N'2017-02-06T14:55:15.647' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.647' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (292, N'Morena', 20, CAST(N'2017-02-06T14:55:15.647' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.647' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (293, N'Sheopur', 20, CAST(N'2017-02-06T14:55:15.650' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.650' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (294, N'Indore', 20, CAST(N'2017-02-06T14:55:15.650' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.650' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (295, N'Dewas', 20, CAST(N'2017-02-06T14:55:15.650' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.650' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (296, N'Dhar', 20, CAST(N'2017-02-06T14:55:15.650' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.650' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (297, N'Katni', 20, CAST(N'2017-02-06T14:55:15.653' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.653' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (298, N'Jabalpur', 20, CAST(N'2017-02-06T14:55:15.653' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.653' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (299, N'East Nimar', 20, CAST(N'2017-02-06T14:55:15.653' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.653' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (300, N'West Nimar', 20, CAST(N'2017-02-06T14:55:15.657' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.657' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (301, N'Barwani', 20, CAST(N'2017-02-06T14:55:15.657' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.657' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (302, N'Khandwa', 20, CAST(N'2017-02-06T14:55:15.660' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.660' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (303, N'Burhanpur', 20, CAST(N'2017-02-06T14:55:15.660' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.660' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (304, N'Khargone', 20, CAST(N'2017-02-06T14:55:15.660' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.660' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (305, N'Neemuch', 20, CAST(N'2017-02-06T14:55:15.660' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.660' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (306, N'Mandsaur', 20, CAST(N'2017-02-06T14:55:15.663' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.663' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (307, N'Jhabua', 20, CAST(N'2017-02-06T14:55:15.663' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.663' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (308, N'Ratlam', 20, CAST(N'2017-02-06T14:55:15.663' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.663' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (309, N'Alirajpur', 20, CAST(N'2017-02-06T14:55:15.667' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.667' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (310, N'Sehore', 20, CAST(N'2017-02-06T14:55:15.667' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.667' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (311, N'Rajgarh', 20, CAST(N'2017-02-06T14:55:15.667' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.667' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (312, N'Ujjain', 20, CAST(N'2017-02-06T14:55:15.670' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.670' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (313, N'Shajapur', 20, CAST(N'2017-02-06T14:55:15.670' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.670' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (314, N'Jalna', 21, CAST(N'2017-02-06T14:55:15.670' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.670' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (315, N'Aurangabad', 21, CAST(N'2017-02-06T14:55:15.673' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.673' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (316, N'Beed', 21, CAST(N'2017-02-06T14:55:15.673' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.673' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (317, N'Jalgaon', 21, CAST(N'2017-02-06T14:55:15.673' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.673' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (318, N'Dhule', 21, CAST(N'2017-02-06T14:55:15.677' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.677' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (319, N'Nandurbar', 21, CAST(N'2017-02-06T14:55:15.677' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.677' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (320, N'Nashik', 21, CAST(N'2017-02-06T14:55:15.677' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.677' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (321, N'Nanded', 21, CAST(N'2017-02-06T14:55:15.680' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.680' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (322, N'Latur', 21, CAST(N'2017-02-06T14:55:15.680' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.680' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (323, N'Osmanabad', 21, CAST(N'2017-02-06T14:55:15.680' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.680' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (324, N'Hingoli', 21, CAST(N'2017-02-06T14:55:15.683' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.683' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (325, N'Parbhani', 21, CAST(N'2017-02-06T14:55:15.683' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.683' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (326, N'South Goa', 11, CAST(N'2017-02-06T14:55:15.683' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.683' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (327, N'North Goa', 11, CAST(N'2017-02-06T14:55:15.687' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.687' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (328, N'Kolhapur', 21, CAST(N'2017-02-06T14:55:15.687' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.687' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (329, N'Ratnagiri', 21, CAST(N'2017-02-06T14:55:15.687' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.687' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (330, N'Sindhudurg', 21, CAST(N'2017-02-06T14:55:15.690' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.690' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (331, N'Satara', 21, CAST(N'2017-02-06T14:55:15.690' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.690' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (332, N'Sangli', 21, CAST(N'2017-02-06T14:55:15.690' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.690' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (333, N'Mumbai', 21, CAST(N'2017-02-06T14:55:15.693' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.693' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (334, N'Raigarh(MH)', 21, CAST(N'2017-02-06T14:55:15.693' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.693' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (335, N'Thane', 21, CAST(N'2017-02-06T14:55:15.693' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.693' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (336, N'Akola', 21, CAST(N'2017-02-06T14:55:15.697' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.697' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (337, N'Washim', 21, CAST(N'2017-02-06T14:55:15.697' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.697' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (338, N'Amravati', 21, CAST(N'2017-02-06T14:55:15.700' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.700' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (339, N'Buldhana', 21, CAST(N'2017-02-06T14:55:15.700' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.700' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (340, N'Gadchiroli', 21, CAST(N'2017-02-06T14:55:15.700' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.700' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (341, N'Chandrapur', 21, CAST(N'2017-02-06T14:55:15.700' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.700' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (342, N'Nagpur', 21, CAST(N'2017-02-06T14:55:15.703' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.703' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (343, N'Gondia', 21, CAST(N'2017-02-06T14:55:15.703' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.703' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (344, N'Bhandara', 21, CAST(N'2017-02-06T14:55:15.703' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.703' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (345, N'Wardha', 21, CAST(N'2017-02-06T14:55:15.707' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.707' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (346, N'Yavatmal', 21, CAST(N'2017-02-06T14:55:15.707' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.707' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (347, N'Ahmed Nagar', 21, CAST(N'2017-02-06T14:55:15.710' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.710' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (348, N'Solapur', 21, CAST(N'2017-02-06T14:55:15.710' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.710' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (349, N'Pune', 21, CAST(N'2017-02-06T14:55:15.710' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.710' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (350, N'Imphal West', 22, CAST(N'2017-02-06T14:55:15.710' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.710' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (351, N'Churachandpur', 22, CAST(N'2017-02-06T14:55:15.713' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.713' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (352, N'Chandel', 22, CAST(N'2017-02-06T14:55:15.713' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.713' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (353, N'Thoubal', 22, CAST(N'2017-02-06T14:55:15.717' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.717' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (354, N'Tamenglong', 22, CAST(N'2017-02-06T14:55:15.717' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.717' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (355, N'Ukhrul', 22, CAST(N'2017-02-06T14:55:15.717' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.717' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (356, N'Imphal East', 22, CAST(N'2017-02-06T14:55:15.720' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.720' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (357, N'Bishnupur', 22, CAST(N'2017-02-06T14:55:15.720' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.720' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (358, N'Senapati', 22, CAST(N'2017-02-06T14:55:15.720' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.720' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (359, N'Aizawl', 24, CAST(N'2017-02-06T14:55:15.720' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.720' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (360, N'Mammit', 24, CAST(N'2017-02-06T14:55:15.723' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.723' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (361, N'Lunglei', 24, CAST(N'2017-02-06T14:55:15.723' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.723' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (362, N'Kolasib', 24, CAST(N'2017-02-06T14:55:15.727' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.727' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (363, N'Lawngtlai', 24, CAST(N'2017-02-06T14:55:15.727' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.727' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (364, N'Champhai', 24, CAST(N'2017-02-06T14:55:15.727' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.727' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (365, N'Saiha', 24, CAST(N'2017-02-06T14:55:15.730' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.730' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (366, N'Serchhip', 24, CAST(N'2017-02-06T14:55:15.730' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.730' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (367, N'Zunhebotto', 25, CAST(N'2017-02-06T14:55:15.730' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.730' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (368, N'Dimapur', 25, CAST(N'2017-02-06T14:55:15.733' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.733' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (369, N'Wokha', 25, CAST(N'2017-02-06T14:55:15.733' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.733' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (370, N'Phek', 25, CAST(N'2017-02-06T14:55:15.733' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.733' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (371, N'Mokokchung', 25, CAST(N'2017-02-06T14:55:15.737' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.737' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (372, N'Kiphire', 25, CAST(N'2017-02-06T14:55:15.737' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.737' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (373, N'Tuensang', 25, CAST(N'2017-02-06T14:55:15.740' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.740' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (374, N'Mon', 25, CAST(N'2017-02-06T14:55:15.740' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.740' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (375, N'Kohima', 25, CAST(N'2017-02-06T14:55:15.740' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.740' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (376, N'Peren', 25, CAST(N'2017-02-06T14:55:15.740' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.740' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (377, N'Longleng', 25, CAST(N'2017-02-06T14:55:15.743' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.743' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (378, N'South Tripura', 33, CAST(N'2017-02-06T14:55:15.743' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.743' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (379, N'West Tripura', 33, CAST(N'2017-02-06T14:55:15.743' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.743' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (380, N'Lower Dibang Valley', 3, CAST(N'2017-02-06T14:55:15.747' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.747' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (381, N'East Siang', 3, CAST(N'2017-02-06T14:55:15.747' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.747' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (382, N'Dibang Valley', 3, CAST(N'2017-02-06T14:55:15.750' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.750' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (383, N'West Siang', 3, CAST(N'2017-02-06T14:55:15.750' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.750' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (384, N'Lohit', 3, CAST(N'2017-02-06T14:55:15.750' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.750' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (385, N'Papum Pare', 3, CAST(N'2017-02-06T14:55:15.750' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.750' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (386, N'Tawang', 3, CAST(N'2017-02-06T14:55:15.753' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.753' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (387, N'West Kameng', 3, CAST(N'2017-02-06T14:55:15.753' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.753' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (388, N'East Kameng', 3, CAST(N'2017-02-06T14:55:15.753' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.753' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (389, N'Lower Subansiri', 3, CAST(N'2017-02-06T14:55:15.757' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.757' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (390, N'Changlang', 3, CAST(N'2017-02-06T14:55:15.757' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.757' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (391, N'Tirap', 3, CAST(N'2017-02-06T14:55:15.757' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.757' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (392, N'Kurung Kumey', 3, CAST(N'2017-02-06T14:55:15.760' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.760' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (393, N'Upper Siang', 3, CAST(N'2017-02-06T14:55:15.760' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.760' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (394, N'Upper Subansiri', 3, CAST(N'2017-02-06T14:55:15.760' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.760' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (395, N'Dhalai', 33, CAST(N'2017-02-06T14:55:15.763' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.763' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (396, N'North Tripura', 33, CAST(N'2017-02-06T14:55:15.763' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.763' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (397, N'West Garo Hills', 23, CAST(N'2017-02-06T14:55:15.763' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.763' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (398, N'East Garo Hills', 23, CAST(N'2017-02-06T14:55:15.767' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.767' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (399, N'Jaintia Hills', 23, CAST(N'2017-02-06T14:55:15.767' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.767' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (400, N'East Khasi Hills', 23, CAST(N'2017-02-06T14:55:15.767' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.767' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (401, N'South Garo Hills', 23, CAST(N'2017-02-06T14:55:15.770' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.770' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (402, N'Ri Bhoi', 23, CAST(N'2017-02-06T14:55:15.770' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.770' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (403, N'West Khasi Hills', 23, CAST(N'2017-02-06T14:55:15.770' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.770' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (404, N'Ganjam', 26, CAST(N'2017-02-06T14:55:15.773' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.773' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (405, N'Gajapati', 26, CAST(N'2017-02-06T14:55:15.773' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.773' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (406, N'Kalahandi', 26, CAST(N'2017-02-06T14:55:15.773' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.773' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (407, N'Nuapada', 26, CAST(N'2017-02-06T14:55:15.777' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.777' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (408, N'Koraput', 26, CAST(N'2017-02-06T14:55:15.777' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.777' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (409, N'Rayagada', 26, CAST(N'2017-02-06T14:55:15.780' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.780' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (410, N'Nabarangapur', 26, CAST(N'2017-02-06T14:55:15.780' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.780' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (411, N'Malkangiri', 26, CAST(N'2017-02-06T14:55:15.780' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.780' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (412, N'Kandhamal', 26, CAST(N'2017-02-06T14:55:15.780' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.780' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (413, N'Boudh', 26, CAST(N'2017-02-06T14:55:15.783' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.783' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (414, N'Baleswar', 26, CAST(N'2017-02-06T14:55:15.783' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.783' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (415, N'Bhadrak', 26, CAST(N'2017-02-06T14:55:15.783' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.783' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (416, N'Kendujhar', 26, CAST(N'2017-02-06T14:55:15.787' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.787' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (417, N'Khorda', 26, CAST(N'2017-02-06T14:55:15.787' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.787' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (418, N'Puri', 26, CAST(N'2017-02-06T14:55:15.790' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.790' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (419, N'Cuttack', 26, CAST(N'2017-02-06T14:55:15.790' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.790' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (420, N'Jajapur', 26, CAST(N'2017-02-06T14:55:15.790' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.790' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (421, N'Kendrapara', 26, CAST(N'2017-02-06T14:55:15.790' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.790' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (422, N'Jagatsinghapur', 26, CAST(N'2017-02-06T14:55:15.793' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.793' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (423, N'Mayurbhanj', 26, CAST(N'2017-02-06T14:55:15.793' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.793' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (424, N'Nayagarh', 26, CAST(N'2017-02-06T14:55:15.797' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.797' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (425, N'Balangir', 26, CAST(N'2017-02-06T14:55:15.797' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.797' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (426, N'Sonapur', 26, CAST(N'2017-02-06T14:55:15.797' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.797' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (427, N'Angul', 26, CAST(N'2017-02-06T14:55:15.800' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.800' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (428, N'Dhenkanal', 26, CAST(N'2017-02-06T14:55:15.800' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.800' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (429, N'Sambalpur', 26, CAST(N'2017-02-06T14:55:15.800' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.800' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (430, N'Bargarh', 26, CAST(N'2017-02-06T14:55:15.803' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.803' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (431, N'Jharsuguda', 26, CAST(N'2017-02-06T14:55:15.803' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.803' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (432, N'Debagarh', 26, CAST(N'2017-02-06T14:55:15.803' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.803' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (433, N'Sundergarh', 26, CAST(N'2017-02-06T14:55:15.807' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.807' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (434, N'Chandigarh', 6, CAST(N'2017-02-06T14:55:15.807' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.807' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (435, N'Ropar', 28, CAST(N'2017-02-06T14:55:15.807' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.807' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (436, N'Mohali', 28, CAST(N'2017-02-06T14:55:15.810' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.810' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (437, N'Rupnagar', 28, CAST(N'2017-02-06T14:55:15.810' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.810' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (438, N'Patiala', 28, CAST(N'2017-02-06T14:55:15.810' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.810' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (439, N'Ludhiana', 28, CAST(N'2017-02-06T14:55:15.813' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.813' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (440, N'Fatehgarh Sahib', 28, CAST(N'2017-02-06T14:55:15.813' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.813' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (441, N'Sangrur', 28, CAST(N'2017-02-06T14:55:15.813' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.813' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (442, N'Barnala', 28, CAST(N'2017-02-06T14:55:15.817' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.817' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (443, N'Amritsar', 28, CAST(N'2017-02-06T14:55:15.817' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.817' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (444, N'Tarn Taran', 28, CAST(N'2017-02-06T14:55:15.820' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.820' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (445, N'Bathinda', 28, CAST(N'2017-02-06T14:55:15.820' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.820' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (446, N'Mansa', 28, CAST(N'2017-02-06T14:55:15.820' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.820' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (447, N'Muktsar', 28, CAST(N'2017-02-06T14:55:15.820' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.820' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (448, N'Moga', 28, CAST(N'2017-02-06T14:55:15.823' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.823' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (449, N'Faridkot', 28, CAST(N'2017-02-06T14:55:15.823' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.823' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (450, N'Firozpur', 28, CAST(N'2017-02-06T14:55:15.823' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.823' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (451, N'Fazilka', 28, CAST(N'2017-02-06T14:55:15.827' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.827' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (452, N'Gurdaspur', 28, CAST(N'2017-02-06T14:55:15.827' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.827' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (453, N'Pathankot', 28, CAST(N'2017-02-06T14:55:15.830' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.830' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (454, N'Hoshiarpur', 28, CAST(N'2017-02-06T14:55:15.830' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.830' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (455, N'Nawanshahr', 28, CAST(N'2017-02-06T14:55:15.830' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.830' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (456, N'Jalandhar', 28, CAST(N'2017-02-06T14:55:15.830' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.830' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (457, N'Kapurthala', 28, CAST(N'2017-02-06T14:55:15.833' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.833' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (458, N'Ajmer', 29, CAST(N'2017-02-06T14:55:15.833' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.833' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (459, N'Rajsamand', 29, CAST(N'2017-02-06T14:55:15.837' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.837' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (460, N'Bhilwara', 29, CAST(N'2017-02-06T14:55:15.837' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.837' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (461, N'Chittorgarh', 29, CAST(N'2017-02-06T14:55:15.837' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.837' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (462, N'Banswara', 29, CAST(N'2017-02-06T14:55:15.840' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.840' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (463, N'Dungarpur', 29, CAST(N'2017-02-06T14:55:15.840' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.840' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (464, N'Kota', 29, CAST(N'2017-02-06T14:55:15.843' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.843' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (465, N'Baran', 29, CAST(N'2017-02-06T14:55:15.843' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.843' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (466, N'Jhalawar', 29, CAST(N'2017-02-06T14:55:15.843' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.843' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (467, N'Bundi', 29, CAST(N'2017-02-06T14:55:15.847' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.847' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (468, N'Tonk', 29, CAST(N'2017-02-06T14:55:15.847' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.847' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (469, N'Udaipur', 29, CAST(N'2017-02-06T14:55:15.850' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.850' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (470, N'Alwar', 29, CAST(N'2017-02-06T14:55:15.850' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.850' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (471, N'Bharatpur', 29, CAST(N'2017-02-06T14:55:15.850' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.850' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (472, N'Dholpur', 29, CAST(N'2017-02-06T14:55:15.853' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.853' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (473, N'Jaipur', 29, CAST(N'2017-02-06T14:55:15.853' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.853' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (474, N'Dausa', 29, CAST(N'2017-02-06T14:55:15.853' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.853' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (475, N'Sawai Madhopur', 29, CAST(N'2017-02-06T14:55:15.857' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.857' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (476, N'Karauli', 29, CAST(N'2017-02-06T14:55:15.857' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.857' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (477, N'Barmer', 29, CAST(N'2017-02-06T14:55:15.860' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.860' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (478, N'Bikaner', 29, CAST(N'2017-02-06T14:55:15.860' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.860' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (479, N'Churu', 29, CAST(N'2017-02-06T14:55:15.860' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.860' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (480, N'Jhujhunu', 29, CAST(N'2017-02-06T14:55:15.863' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.863' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (481, N'Jodhpur', 29, CAST(N'2017-02-06T14:55:15.863' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.863' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (482, N'Jaisalmer', 29, CAST(N'2017-02-06T14:55:15.863' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.863' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (483, N'Nagaur', 29, CAST(N'2017-02-06T14:55:15.867' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.867' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (484, N'Pali', 29, CAST(N'2017-02-06T14:55:15.867' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.867' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (485, N'Sikar', 29, CAST(N'2017-02-06T14:55:15.870' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.870' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (486, N'Sirohi', 29, CAST(N'2017-02-06T14:55:15.870' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.870' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (487, N'Jalor', 29, CAST(N'2017-02-06T14:55:15.870' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.870' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (488, N'Ganganagar', 29, CAST(N'2017-02-06T14:55:15.873' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.873' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (489, N'Hanumangarh', 29, CAST(N'2017-02-06T14:55:15.873' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.873' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (490, N'Chennai', 31, CAST(N'2017-02-06T14:55:15.873' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.873' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (491, N'Vellore', 31, CAST(N'2017-02-06T14:55:15.877' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.877' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (492, N'Tiruvannamalai', 31, CAST(N'2017-02-06T14:55:15.877' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.877' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (493, N'Kanchipuram', 31, CAST(N'2017-02-06T14:55:15.877' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.877' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (494, N'Tiruvallur', 31, CAST(N'2017-02-06T14:55:15.880' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.880' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (495, N'Villupuram', 31, CAST(N'2017-02-06T14:55:15.880' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.880' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (496, N'Cuddalore', 31, CAST(N'2017-02-06T14:55:15.880' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.880' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (497, N'Coimbatore', 31, CAST(N'2017-02-06T14:55:15.883' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.883' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (498, N'Dharmapuri', 31, CAST(N'2017-02-06T14:55:15.883' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.883' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (499, N'Salem', 31, CAST(N'2017-02-06T14:55:15.883' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.883' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (500, N'Erode', 31, CAST(N'2017-02-06T14:55:15.887' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.887' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (501, N'Karur', 31, CAST(N'2017-02-06T14:55:15.887' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.887' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (502, N'Namakkal', 31, CAST(N'2017-02-06T14:55:15.903' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.903' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (503, N'Krishnagiri', 31, CAST(N'2017-02-06T14:55:15.907' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.907' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (504, N'Nilgiris', 31, CAST(N'2017-02-06T14:55:15.907' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.907' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (505, N'Dindigul', 31, CAST(N'2017-02-06T14:55:15.910' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.910' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (506, N'Kanyakumari', 31, CAST(N'2017-02-06T14:55:15.910' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.910' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (507, N'Sivaganga', 31, CAST(N'2017-02-06T14:55:15.910' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.910' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (508, N'Ramanathapuram', 31, CAST(N'2017-02-06T14:55:15.913' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.913' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (509, N'Tuticorin', 31, CAST(N'2017-02-06T14:55:15.913' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.913' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (510, N'Tirunelveli', 31, CAST(N'2017-02-06T14:55:15.913' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.913' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (511, N'Madurai', 31, CAST(N'2017-02-06T14:55:15.917' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.917' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (512, N'Theni', 31, CAST(N'2017-02-06T14:55:15.917' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.917' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (513, N'Virudhunagar', 31, CAST(N'2017-02-06T14:55:15.920' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.920' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (514, N'Ariyalur', 31, CAST(N'2017-02-06T14:55:15.920' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.920' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (515, N'Tiruchirappalli', 31, CAST(N'2017-02-06T14:55:15.920' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.920' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (516, N'Pudukkottai', 31, CAST(N'2017-02-06T14:55:15.923' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.923' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (517, N'Tiruvarur', 31, CAST(N'2017-02-06T14:55:15.923' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.923' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (518, N'Thanjavur', 31, CAST(N'2017-02-06T14:55:15.927' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.927' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (519, N'Nagapattinam', 31, CAST(N'2017-02-06T14:55:15.927' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.927' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (520, N'Karaikal', 27, CAST(N'2017-02-06T14:55:15.927' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.927' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (521, N'Perambalur', 31, CAST(N'2017-02-06T14:55:15.930' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.930' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (522, N'Agra', 34, CAST(N'2017-02-06T14:55:15.930' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.930' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (523, N'Aligarh', 34, CAST(N'2017-02-06T14:55:15.930' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.930' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (524, N'Hathras', 34, CAST(N'2017-02-06T14:55:15.933' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.933' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (525, N'Bulandshahr', 34, CAST(N'2017-02-06T14:55:15.933' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.933' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (526, N'Gautam Buddha Nagar', 34, CAST(N'2017-02-06T14:55:15.937' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.937' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (527, N'Etah', 34, CAST(N'2017-02-06T14:55:15.937' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.937' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (528, N'Firozabad', 34, CAST(N'2017-02-06T14:55:15.940' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.940' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (529, N'Etawah', 34, CAST(N'2017-02-06T14:55:15.940' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.940' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (530, N'Auraiya', 34, CAST(N'2017-02-06T14:55:15.940' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.940' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (531, N'Jhansi', 34, CAST(N'2017-02-06T14:55:15.943' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.943' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (532, N'Jalaun', 34, CAST(N'2017-02-06T14:55:15.943' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.943' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (533, N'Lalitpur', 34, CAST(N'2017-02-06T14:55:15.943' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.943' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (534, N'Mainpuri', 34, CAST(N'2017-02-06T14:55:15.947' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.947' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (535, N'Mathura', 34, CAST(N'2017-02-06T14:55:15.947' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.947' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (536, N'Azamgarh', 34, CAST(N'2017-02-06T14:55:15.950' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.950' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (537, N'Allahabad', 34, CAST(N'2017-02-06T14:55:15.950' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.950' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (538, N'Kaushambi', 34, CAST(N'2017-02-06T14:55:15.950' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.950' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (539, N'Ghazipur', 34, CAST(N'2017-02-06T14:55:15.953' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.953' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (540, N'Jaunpur', 34, CAST(N'2017-02-06T14:55:15.953' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.953' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (541, N'Sonbhadra', 34, CAST(N'2017-02-06T14:55:15.957' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.957' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (542, N'Mirzapur', 34, CAST(N'2017-02-06T14:55:15.957' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.957' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (543, N'Pratapgarh', 34, CAST(N'2017-02-06T14:55:15.957' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.957' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (544, N'Varanasi', 34, CAST(N'2017-02-06T14:55:15.960' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.960' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (545, N'Chandauli', 34, CAST(N'2017-02-06T14:55:15.960' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.960' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (546, N'Sant Ravidas Nagar', 34, CAST(N'2017-02-06T14:55:15.960' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.960' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (547, N'Pilibhit', 34, CAST(N'2017-02-06T14:55:15.963' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.963' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (548, N'Bareilly', 34, CAST(N'2017-02-06T14:55:15.963' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.963' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (549, N'Bijnor', 34, CAST(N'2017-02-06T14:55:15.967' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.967' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (550, N'Haridwar', 35, CAST(N'2017-02-06T14:55:15.967' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.967' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (551, N'Budaun', 34, CAST(N'2017-02-06T14:55:15.970' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.970' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (552, N'Hardoi', 34, CAST(N'2017-02-06T14:55:15.970' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.970' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (553, N'Kheri', 34, CAST(N'2017-02-06T14:55:15.970' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.970' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (554, N'Meerut', 34, CAST(N'2017-02-06T14:55:15.973' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.973' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (555, N'Bagpat', 34, CAST(N'2017-02-06T14:55:15.973' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.973' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (556, N'Moradabad', 34, CAST(N'2017-02-06T14:55:15.977' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.977' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (557, N'Jyotiba Phule Nagar', 34, CAST(N'2017-02-06T14:55:15.977' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.977' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (558, N'Rampur', 34, CAST(N'2017-02-06T14:55:15.980' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.980' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (559, N'Muzaffarnagar', 34, CAST(N'2017-02-06T14:55:15.980' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.980' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (560, N'Saharanpur', 34, CAST(N'2017-02-06T14:55:15.980' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.980' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (561, N'Shahjahanpur', 34, CAST(N'2017-02-06T14:55:15.983' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.983' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (562, N'Mau', 34, CAST(N'2017-02-06T14:55:15.983' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.983' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (563, N'Shrawasti', 34, CAST(N'2017-02-06T14:55:15.983' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.983' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (564, N'Bahraich', 34, CAST(N'2017-02-06T14:55:15.987' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.987' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (565, N'Ballia', 34, CAST(N'2017-02-06T14:55:15.987' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.987' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (566, N'Siddharthnagar', 34, CAST(N'2017-02-06T14:55:15.990' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.990' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (567, N'Sant Kabir Nagar', 34, CAST(N'2017-02-06T14:55:15.990' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.990' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (568, N'Basti', 34, CAST(N'2017-02-06T14:55:15.990' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.990' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (569, N'Deoria', 34, CAST(N'2017-02-06T14:55:15.993' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.993' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (570, N'Kushinagar', 34, CAST(N'2017-02-06T14:55:15.993' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.993' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (571, N'Gonda', 34, CAST(N'2017-02-06T14:55:15.997' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.997' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (572, N'Balrampur', 34, CAST(N'2017-02-06T14:55:15.997' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:15.997' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (573, N'Gorakhpur', 34, CAST(N'2017-02-06T14:55:16.000' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.000' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (574, N'Maharajganj', 34, CAST(N'2017-02-06T14:55:16.000' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.000' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (575, N'Banda', 34, CAST(N'2017-02-06T14:55:16.000' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.000' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (576, N'Chitrakoot', 34, CAST(N'2017-02-06T14:55:16.003' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.003' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (577, N'Mahoba', 34, CAST(N'2017-02-06T14:55:16.003' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.003' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (578, N'Hamirpur', 34, CAST(N'2017-02-06T14:55:16.007' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.007' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (579, N'Kannauj', 34, CAST(N'2017-02-06T14:55:16.007' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.007' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (580, N'Farrukhabad', 34, CAST(N'2017-02-06T14:55:16.007' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.007' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (581, N'Fatehpur', 34, CAST(N'2017-02-06T14:55:16.010' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.010' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (582, N'Kanpur Nagar', 34, CAST(N'2017-02-06T14:55:16.010' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.010' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (583, N'Unnao', 34, CAST(N'2017-02-06T14:55:16.010' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.010' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (584, N'Kanpur Dehat', 34, CAST(N'2017-02-06T14:55:16.013' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.013' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (585, N'Barabanki', 34, CAST(N'2017-02-06T14:55:16.013' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.013' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (586, N'Faizabad', 34, CAST(N'2017-02-06T14:55:16.017' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.017' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (587, N'Ambedkar Nagar', 34, CAST(N'2017-02-06T14:55:16.017' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.017' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (588, N'Ghaziabad', 34, CAST(N'2017-02-06T14:55:16.020' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.020' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (589, N'Lucknow', 34, CAST(N'2017-02-06T14:55:16.020' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.020' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (590, N'Raebareli', 34, CAST(N'2017-02-06T14:55:16.020' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.020' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (591, N'Sitapur', 34, CAST(N'2017-02-06T14:55:16.023' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.023' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (592, N'Sultanpur', 34, CAST(N'2017-02-06T14:55:16.023' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.023' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (593, N'Almora', 35, CAST(N'2017-02-06T14:55:16.027' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.027' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (594, N'Bageshwar', 35, CAST(N'2017-02-06T14:55:16.027' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.027' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (595, N'Chamoli', 35, CAST(N'2017-02-06T14:55:16.030' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.030' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (596, N'Rudraprayag', 35, CAST(N'2017-02-06T14:55:16.030' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.030' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (597, N'Dehradun', 35, CAST(N'2017-02-06T14:55:16.030' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.030' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (598, N'Udham Singh Nagar', 35, CAST(N'2017-02-06T14:55:16.033' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.033' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (599, N'Nainital', 35, CAST(N'2017-02-06T14:55:16.033' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.033' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (600, N'Champawat', 35, CAST(N'2017-02-06T14:55:16.037' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.037' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (601, N'Pauri Garhwal', 35, CAST(N'2017-02-06T14:55:16.037' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.037' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (602, N'Pithoragarh', 35, CAST(N'2017-02-06T14:55:16.040' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.040' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (603, N'Tehri Garhwal', 35, CAST(N'2017-02-06T14:55:16.040' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.040' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (604, N'Uttarkashi', 35, CAST(N'2017-02-06T14:55:16.040' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.040' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (605, N'Kolkata', 36, CAST(N'2017-02-06T14:55:16.043' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.043' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (606, N'North 24 Parganas', 36, CAST(N'2017-02-06T14:55:16.043' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.043' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (607, N'South 24 Parganas', 36, CAST(N'2017-02-06T14:55:16.047' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.047' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (608, N'Birbhum', 36, CAST(N'2017-02-06T14:55:16.047' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.047' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (609, N'Murshidabad', 36, CAST(N'2017-02-06T14:55:16.047' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.047' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (610, N'Nadia', 36, CAST(N'2017-02-06T14:55:16.050' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.050' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (611, N'South Andaman', 1, CAST(N'2017-02-06T14:55:16.050' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.050' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (612, N'North And Middle Andaman', 1, CAST(N'2017-02-06T14:55:16.053' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.053' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (613, N'Nicobar', 1, CAST(N'2017-02-06T14:55:16.053' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.053' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (614, N'Cooch Behar', 36, CAST(N'2017-02-06T14:55:16.053' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.053' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (615, N'Jalpaiguri', 36, CAST(N'2017-02-06T14:55:16.057' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.057' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (616, N'Darjiling', 36, CAST(N'2017-02-06T14:55:16.057' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.057' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (617, N'Malda', 36, CAST(N'2017-02-06T14:55:16.060' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.060' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (618, N'East Sikkim', 30, CAST(N'2017-02-06T14:55:16.060' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.060' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (619, N'West Sikkim', 30, CAST(N'2017-02-06T14:55:16.060' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.060' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (620, N'South Sikkim', 30, CAST(N'2017-02-06T14:55:16.063' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.063' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (621, N'North Sikkim', 30, CAST(N'2017-02-06T14:55:16.063' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.063' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (622, N'South Dinajpur', 36, CAST(N'2017-02-06T14:55:16.067' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.067' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (623, N'North Dinajpur', 36, CAST(N'2017-02-06T14:55:16.067' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.067' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (624, N'Bardhaman', 36, CAST(N'2017-02-06T14:55:16.067' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.067' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (625, N'Bankura', 36, CAST(N'2017-02-06T14:55:16.070' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.070' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (626, N'West Midnapore', 36, CAST(N'2017-02-06T14:55:16.070' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.070' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (627, N'East Midnapore', 36, CAST(N'2017-02-06T14:55:16.070' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.070' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (628, N'Hooghly', 36, CAST(N'2017-02-06T14:55:16.073' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.073' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (629, N'Howrah', 36, CAST(N'2017-02-06T14:55:16.073' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.073' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (630, N'Medinipur', 36, CAST(N'2017-02-06T14:55:16.077' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.077' AS DateTime))
+GO
+INSERT [dbo].[tblCity] ([CityID], [CityName], [StateID], [AddDate], [IsActive], [IsDelete], [LastUpdate]) VALUES (631, N'Puruliya', 36, CAST(N'2017-02-06T14:55:16.077' AS DateTime), 1, 0, CAST(N'2017-02-06T14:55:16.077' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[tblCity] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tblState] ON 
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (1, N'ANDAMAN & NICOBAR ISLANDS', 1, CAST(N'2017-02-06T14:32:36.607' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.607' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (2, N'ANDHRA PRADESH', 1, CAST(N'2017-02-06T14:32:36.607' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.607' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (3, N'ARUNACHAL PRADESH', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (4, N'ASSAM', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (5, N'BIHAR', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (6, N'CHANDIGARH', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (7, N'CHATTISGARH', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (8, N'DADRA & NAGAR HAVELI', 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.610' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (9, N'DAMAN & DIU', 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (10, N'DELHI', 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (11, N'GOA', 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (12, N'GUJARAT', 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.613' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (13, N'HARYANA', 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (14, N'HIMACHAL PRADESH', 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (15, N'JAMMU & KASHMIR', 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (16, N'JHARKHAND', 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.617' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (17, N'KARNATAKA', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (18, N'KERALA', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (19, N'LAKSHADWEEP', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (20, N'MADHYA PRADESH', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (21, N'MAHARASHTRA', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (22, N'MANIPUR', 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.620' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (23, N'MEGHALAYA', 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (24, N'MIZORAM', 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (25, N'NAGALAND', 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (26, N'ODISHA', 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.623' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (27, N'PONDICHERRY', 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (28, N'PUNJAB', 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (29, N'RAJASTHAN', 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (30, N'SIKKIM', 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.627' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (31, N'TAMIL NADU', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (32, N'TELANGANA', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (33, N'TRIPURA', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (34, N'UTTAR PRADESH', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (35, N'UTTARAKHAND', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+INSERT [dbo].[tblState] ([StateID], [StateName], [CountryID], [AddDate], [IsActive], [LastUpdate], [IsDelete]) VALUES (36, N'WEST BENGAL', 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 1, CAST(N'2017-02-06T14:32:36.630' AS DateTime), 0)
+GO
+SET IDENTITY_INSERT [dbo].[tblState] OFF
+GO
+ALTER TABLE [dbo].[tbl_contact] ADD  DEFAULT (CONVERT([bit],(0))) FOR [ResponseStatus]
+GO
+ALTER TABLE [dbo].[tbl_booktrips]  WITH CHECK ADD  CONSTRAINT [FK_tbl_booktrips_tbl_user_user_id] FOREIGN KEY([user_id])
+REFERENCES [dbo].[tbl_user] ([user_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[tbl_booktrips] CHECK CONSTRAINT [FK_tbl_booktrips_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_bus]  WITH CHECK ADD  CONSTRAINT [FK_tbl_bus_tbl_user_user_id] FOREIGN KEY([user_id])
+REFERENCES [dbo].[tbl_user] ([user_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[tbl_bus] CHECK CONSTRAINT [FK_tbl_bus_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_flight]  WITH CHECK ADD  CONSTRAINT [FK_tbl_flight_tbl_user_user_id] FOREIGN KEY([user_id])
+REFERENCES [dbo].[tbl_user] ([user_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[tbl_flight] CHECK CONSTRAINT [FK_tbl_flight_tbl_user_user_id]
+GO
+ALTER TABLE [dbo].[tbl_train]  WITH CHECK ADD  CONSTRAINT [FK_tbl_train_tbl_user_user_id] FOREIGN KEY([user_id])
+REFERENCES [dbo].[tbl_user] ([user_id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[tbl_train] CHECK CONSTRAINT [FK_tbl_train_tbl_user_user_id]
+GO
