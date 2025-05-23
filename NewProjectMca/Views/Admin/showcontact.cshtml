@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "showcontact";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@using NewProjectMca.Models
+@model List<contact>
+
+<main id="main" class="main">
+
+    <div class="pagetitle d-flex flex-wrap justify-content-between align-items-center">
+        <h1 class="mb-2 mb-md-0">All Contact</h1>
+
+        <!-- Buttons on the right side -->
+
+    </div><!-- End Page Title -->
+
+
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datatables</h5>
+
+                        <!-- Table with stripped rows -->
+                        <div class="table-responsive">
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+
+                                        <th>Sr. No.</th> <!-- Serial Number Column Added -->
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Subject</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int srNo = 1; // Serial Number Initialization
+                                    }
+                                    @foreach (var cus in Model)
+                                    {
+                                        <tr>
+                                            <td>@srNo</td> <!-- Serial Number -->
+                                            <td>@cus.name</td>
+                                            <td>@cus.email</td>
+                                            <td>@cus.subject</td>
+                                            <td>@cus.message</td>
+
+
+                                            <td>
+                                                @if (cus.ResponseStatus)
+                                                {
+                                                    <button class="btn btn-warning" disabled>Responded</button>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("MarkAsResponded", "Admin", new { id = cus.c_id })" class="btn btn-danger">
+                                                        Response
+                                                    </a>
+                                                }
+                                            </td>
+
+
+                                        </tr>
+                                        srNo++; // Increment Serial Number
+                                    }
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+

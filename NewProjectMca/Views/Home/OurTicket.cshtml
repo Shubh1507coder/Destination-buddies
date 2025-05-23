@@ -1,0 +1,354 @@
+﻿
+@{
+    
+    Layout = null;
+}
+@using NewProjectMca.Models
+@model TicketViewModel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="text-center mb-4">Your Tickets 🎫</h2>
+
+<div class="container">
+    @{
+        decimal totalPrice = 0; // Initialize total price
+    }
+
+    @foreach (var bus in Model.Buses)
+    {
+        decimal busPrice = 0;
+
+        // Convert bus.price (string) to decimal, handle invalid values
+        if (!string.IsNullOrEmpty(bus.price) && decimal.TryParse(bus.price, out decimal parsedPrice))
+        {
+            busPrice = parsedPrice;
+        }
+
+        totalPrice += busPrice; // Add converted price to total
+
+        <div class="ticket" id="ticket-@bus.b_id">
+            <div class="ticket-header bus-ticket">
+                <h3>🚌 Bus Ticket</h3>
+                <p><strong>Bus ID:</strong> @bus.b_id</p>
+            </div>
+            <div class="ticket-body">
+                <div class="left">
+                    <p><strong>From:</strong> @bus.b_from</p>
+                    <p><strong>To:</strong> @bus.b_to</p>
+                    <p><strong>Date:</strong> @(bus.b_date?.ToString("dd-MM-yyyy") ?? "N/A")</p>
+                    <p><strong>Passengers:</strong> @bus.passengers</p>
+                </div>
+            </div>
+            <div class="ticket-footer">
+                <span>Ticket No: #@bus.b_id</span>
+                <span><strong>Price:</strong> ₹@busPrice</span>
+                <button class="btn btn-danger cancel-ticket" data-id="@bus.b_id" data-type="bus">Cancel</button>
+            </div>
+        </div>
+    }
+
+    <!-- Total Price Display -->
+    <div class="total-price">
+        <h4>Total Price: ₹@totalPrice</h4>
+    </div>
+
+
+    <!-- Total Price Display -->
+    <div class="total-price">
+        <h4>Total Price: ₹@totalPrice</h4>
+    </div>
+
+    @foreach (var flight in Model.Flights)
+{
+    decimal flightPrice = 0;
+
+    if (!string.IsNullOrEmpty(flight.price) && decimal.TryParse(flight.price, out decimal parsedPrice))
+    {
+        flightPrice = parsedPrice;
+    }
+
+    totalPrice += flightPrice;
+
+    <div class="ticket" id="ticket-@flight.f_id">
+        <div class="ticket-header flight-ticket">
+            <h3>✈️ Flight Ticket</h3>
+            <p><strong>Flight ID:</strong> @flight.f_id</p>
+        </div>
+        <div class="ticket-body">
+            <div class="left">
+                <p><strong>From:</strong> @flight.f_from</p>
+                <p><strong>To:</strong> @flight.f_to</p>
+                <p><strong>Date:</strong> @flight.f_date?.ToString("dd-MM-yyyy")</p>
+                <p><strong>Passengers:</strong> @flight.passengers</p>
+            </div>
+        </div>
+        <div class="ticket-footer">
+            <span>Ticket No: #@flight.f_id</span>
+            <span><strong>Price:</strong> ₹@flightPrice</span>
+            <button class="btn btn-danger cancel-ticket" data-id="@flight.f_id" data-type="flight">Cancel</button>
+        </div>
+    </div>
+}
+
+    @foreach (var train in Model.Trains)
+    {
+        totalPrice += train.price;
+        <div class="ticket" id="ticket-@train.t_id">
+            <div class="ticket-header train-ticket">
+                <h3>🚆 Train Ticket</h3>
+                <p><strong>Train ID:</strong> @train.t_id</p>
+            </div>
+            <div class="ticket-body">
+                <div class="left">
+                    <p><strong>From:</strong> @train.t_from</p>
+                    <p><strong>To:</strong> @train.t_to</p>
+                    <p><strong>Date:</strong> @train.t_date?.ToString("dd-MM-yyyy")</p>
+                    <p><strong>Passengers:</strong> @train.passengers</p>
+                </div>
+            </div>
+            <div class="ticket-footer">
+                <span>Ticket No: #@train.t_id</span>
+                <span><strong>Price:</strong> ₹@train.price</span>
+                <button class="btn btn-danger cancel-ticket" data-id="@train.t_id" data-type="train">Cancel</button>
+            </div>
+        </div>
+    }
+
+
+
+    @foreach (var bus in Model.booktrips)
+    {
+        totalPrice += bus.price;
+        <div class="ticket" id="ticket-@bus.b_id">
+            <div class="ticket-header bus-ticket">
+                <h3>Trip Ticket</h3>
+                <p><strong>trip Id:</strong> @bus.b_id</p>
+            </div>
+            <div class="ticket-body">
+                <div class="left">
+                    <p><strong>From:</strong> @bus.trip_from</p>
+                    <p><strong>To:</strong> @bus.trip_date</p>
+                    
+                    <p><strong>Passengers:</strong> @bus.passengers</p>
+                </div>
+            </div>
+            <div class="ticket-footer">
+                <span>Ticket No: #@bus.b_id</span>
+                <span><strong>Price:</strong> ₹@bus.price</span>
+                <button class="btn btn-danger cancel-ticket" data-id="@bus.b_id" data-type="bus">Cancel</button>
+
+
+            </div>
+        </div>
+    }
+
+    <div class="total-payment">
+        <h3>Total Amount: ₹<span id="total-price">@totalPrice</span></h3>
+        <button id="pay-now" class="btn btn-primary">Pay Now</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".cancel-ticket").forEach(button => {
+            button.addEventListener("click", function () {
+                let ticketId = this.getAttribute("data-id");
+                let ticketType = this.getAttribute("data-type");
+                let ticketElement = document.getElementById(`ticket-${ticketId}`);
+                let ticketPrice = parseFloat(ticketElement.querySelector(".ticket-footer span strong").innerText.replace('₹', ''));
+
+                fetch(`/Ticket/Cancel`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ id: ticketId, type: ticketType })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        ticketElement.remove();
+                        let totalPriceElement = document.getElementById("total-price");
+                        let currentTotal = parseFloat(totalPriceElement.innerText);
+                        totalPriceElement.innerText = (currentTotal - ticketPrice).toFixed(2);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    body {
+        background: #f3f4f6;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .ticket {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+        border-left: 8px solid #ff5e62;
+    }
+
+    .ticket-header {
+        padding: 10px 20px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .bus-ticket {
+        background: #ff5e62;
+    }
+
+    .flight-ticket {
+        background: #2f80ed;
+    }
+
+    .train-ticket {
+        background: #7f7fd5;
+    }
+
+    .ticket-body {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .ticket-footer {
+        background: #ddd;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: bold;
+        align-items: center;
+    }
+
+    .total-payment {
+        text-align: center;
+        margin-top: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+</style>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    document.getElementById("pay-now").addEventListener("click", function () {
+        var options = {
+            "key": "rzp_test_vTbEoID02du5vk", // Razorpay API Key
+            "amount": @((int)(totalPrice * 100)), // Amount in paisa
+            "currency": "INR",
+            "name": "Mobiteq Pay",
+            "description": "Ticket Payment",
+            "image": "https://yourwebsite.com/logo.png", // Your Logo
+            "order_id": "@ViewBag.OrderId", // Backend se aayega
+            "handler": function (response) {
+                // Payment Successful
+               window.location.href = "/home/PaymentSuccess?paymentId=" + response.razorpay_payment_id;
+
+            },
+            "prefill": {
+                "name": "@User.Identity.Name",
+                "email": "user@example.com",
+                "contact": "9999999999"
+            },
+            "theme": {
+                "color": "#28a745"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    });
+</script>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on("click", ".cancel-ticket", function () {
+        var ticketId = $(this).data("id");
+        var ticketType = $(this).data("type");
+        var cancelUrl = "";
+
+        if (ticketType === "bus") {
+            cancelUrl = '@Url.Action("CancelBusTicket", "Home")';
+        } else if (ticketType === "flight") {
+            cancelUrl = '@Url.Action("CancelFlightTicket", "Home")';
+        } else if (ticketType === "train") {
+            cancelUrl = '@Url.Action("CancelTrainTicket", "Home")';
+        }
+
+        $.ajax({
+            url: cancelUrl,
+            type: "POST",
+            data: { id: ticketId },
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload(); // Page refresh karne ke liye
+                } else {
+                    alert("Error: " + response.message);
+                }
+            },
+            error: function () {
+                alert("Something went wrong! Try again.");
+            }
+        });
+    });
+</script>
+
+</script>
+
+
