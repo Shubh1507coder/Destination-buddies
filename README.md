@@ -1,0 +1,3 @@
+Overview 
+The Destination Buddy is a comprehensive web application designed to facilitate seamless travel planning, booking, and management for users. This project aims to create an integrated platform where users can explore various travel destinations, book accommodation, flights, and activities, and manage their travel itineraries with ease. 
+Leveraging modern web technologies, the frontend of the application is developed using HTML, CSS, and JavaScript, ensuring a responsive and user-friendly interface. The backend is powered by a minimalist web framework for Node.js, and Mongoose, an elegant MongoDB object modeling tool, to handle data storage and retrieval efficiently. 
